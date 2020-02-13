@@ -6,8 +6,6 @@ import textwrap
 
 class Player:
 
-    directions = ['n','s','e','w','q']
-
     def __init__(self, name, room):
         self.name = name
         self.current_room = room
@@ -26,10 +24,6 @@ class Player:
         if direction == 'q':
             print("\nGame Over\n")
             return False
-
-        if direction not in self.directions:
-            print(f"'{direction}' is an invalid selection, use any of these {self.directions}\n")
-            return True
 
         if hasattr(self.current_room,f'{direction}_to'):
             roomKey = None
