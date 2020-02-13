@@ -51,7 +51,23 @@ status = True
 
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
+def handleAction(actionType,game_player):
+    if actionType == 'get' or actionType == 'take':
+        return game_player.getItem
+    elif actionType == 'drop':
+        return game_player.dropItem
+    # elif typedInput['actionType'] == 'move':
+    #     return player1.move
+    # elif typedInput['actionType'] == 'inventory' or typedInput['actionType'] == 'i':
+
+
+    else: print("this case is not implememted")
+
+
 while (status):
+
+    # show items in room
+    player1.printItemsInView()
     selection = input('\nSelect your movement: ')
     typedInput = inputParser(selection)
     if typedInput['err']:
@@ -60,10 +76,14 @@ while (status):
 
     if typedInput['actionType'] == 'move':
         status = player1.move(selection, room)
-    else:
-        print("Handle else case")
-        #Todo handle get or take actions
-    # print(f'User can see {player1.current_room.items} items')
+        continue
+    elif typedInput['actionType'] == 'inventory' or typedInput['actionType'] == 'i':
+        player1.getItems()
+        continue
+
+    handler = handleAction(typedInput['actionType'],player1)
+    handler(typedInput['splittedInput'][1])
+
     continueGame = status
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
