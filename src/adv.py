@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from inputParser import inputParser
 
 # Declare all the rooms
 
@@ -52,10 +53,18 @@ status = True
 # * Waits for user input and decides what to do.
 while (status):
     selection = input('\nSelect your movement: ')
-    status = player1.move(selection, room)
+    typedInput = inputParser(selection)
+    if typedInput['err']:
+        print(typedInput['msg'])
+        continue
+
+    if typedInput['actionType'] == 'move':
+        status = player1.move(selection, room)
+    else:
+        print("Handle else case")
+        #Todo handle get or take actions
+    # print(f'User can see {player1.current_room.items} items')
     continueGame = status
-
-
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
