@@ -4,6 +4,7 @@
 import textwrap
 from room import Room
 from item import Item
+from color import color
 
 class Player(Room):
 
@@ -58,7 +59,7 @@ class Player(Room):
                 item.on_take(name)
                 return True
 
-        print(f'{name} is not in  {self.current_room.name} room')
+        print(f'\n{color.RED} {name} is not in  {self.current_room.name} room {color.END}')
         return False
 
     def dropItem(self,name):
@@ -70,7 +71,7 @@ class Player(Room):
                 self.current_room.addItem(item)
                 item.on_drop(name)
                 return True
-        print(f'{name} is not in the inventory')
+        print(f'\n{color.RED}  {name} is not in the inventory {color.END}')
         return False
 
     def getItems(self):
@@ -87,13 +88,15 @@ class Player(Room):
             print(f'\nThese are items in the {self.current_room.name} room:\n')
 
             count = 1
+            itemsStr = ""
             for item in self.current_room.items:
-                print(f'Item {count}: {item.name}')
+                itemsStr += f'[{count}]: {item.name}    '
                 count += 1
+            print(itemsStr)
         else: print('Room is empty!')
 
 
-            
+           # print(color.BOLD + 'Hello World !' + color.END) 
         
 
 

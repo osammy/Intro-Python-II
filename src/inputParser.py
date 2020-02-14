@@ -4,6 +4,8 @@ def inputParser(enteredInput):
 
     verbs = ['n','s','e','w','q','inventory','i','get', 'take', 'drop']
 
+    print(F"DHJDGJHDJH ==== {strippedInput}")
+
     if lengthOfInput == 1:
         if strippedInput == 'i':
             return {
