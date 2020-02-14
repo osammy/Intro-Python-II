@@ -80,22 +80,23 @@ status = True
 # * Waits for user input and decides what to do.
 
 def handlePlay(typedInput,player):
-    actionType = typedInput['actionType']
+
     status = True
+
     if typedInput['err']:
         print(color.RED + typedInput['msg'] + color.END)
         return status
 
-    if actionType == 'move':
+    if typedInput['actionType'] == 'move':
         status = player.move(selection, room)
         return status
-    elif (actionType == 'inventory') or (actionType == 'i'):
+    elif (typedInput['actionType'] == 'inventory') or (typedInput['actionType'] == 'i'):
         player.getItems()
     # Handle getting, taking actionTypes
-    elif actionType == 'get' or actionType == 'take':
+    elif typedInput['actionType'] == 'get' or typedInput['actionType'] == 'take':
         itemName = typedInput['splittedInput'][1]
         player.getItem(itemName)
-    elif actionType == 'drop':
+    elif typedInput['actionType'] == 'drop':
         itemName = typedInput['splittedInput'][1]
         player.dropItem(itemName)
     else:

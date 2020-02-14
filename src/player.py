@@ -76,16 +76,19 @@ class Player(Room):
 
     def getItems(self):
         if len(self.items) > 0:
-            print('\nThese are the inventory:')
+            print('* * * * ' * 7)
+            print(color.CYAN + '\nThese are the inventory:' + color.END)
             count = 1
             for item in self.items:
                 print(f'\nItem {count}: {item.name}')
                 count += 1
+            print('* * * * ' * 7)
         else: print('Inventory is empty!')
 
     def printItemsInView(self):
         if len(self.current_room.items) > 0:
-            print(f'\nThese are items in the {self.current_room.name} room:\n')
+            print(color.UNDERLINE + "   " *20 + color.END)
+            print(f'\n{color.YELLOW}These are items in the {self.current_room.name} room:\n{color.END}')
 
             count = 1
             itemsStr = ""
@@ -93,6 +96,7 @@ class Player(Room):
                 itemsStr += f'[{count}]: {item.name}    '
                 count += 1
             print(itemsStr)
+            print(color.UNDERLINE + "   " *20 + color.END)
         else: print('Room is empty!')
 
 
